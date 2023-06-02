@@ -69,5 +69,25 @@ let RevealElementsOnScroll = {
             }
         });
     },
+    LeftToRight: (className, referenceClass) => {
+        const reference = document.getElementsByClassName(referenceClass)[0]
+        reference.addEventListener("scroll", function () {
+            var hidden = document.getElementsByClassName(className);
+            var screen = window.innerHeight;
+            for (var i = 0; i < hidden.length; i++) {
+                hidden[i].style.transition = '1000ms ease-out'
+                hidden[i].style.position = 'absolute'
+                hidden[i].style.transitionProperty = "right, opacity"
+                var distance = hidden[i].getBoundingClientRect().top;
+                if (distance < screen) {
+                    hidden[i].style.right = "0%"
+                    hidden[i].style.opacity = 1
+                } else if (distance >= screen) {
+                    hidden[i].style.right = "100%"
+                    hidden[i].style.opacity = 0
+                }
+            }
+        });
+    },
 }
 export default RevealElementsOnScroll
