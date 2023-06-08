@@ -88,6 +88,7 @@ let RevealElementsOnScroll = {
                 }
             }
         });
+    },
         Opacity: (className, referenceClass) => {
         const reference = document.getElementsByClassName(referenceClass)[0]
         reference.addEventListener("scroll", function () {
@@ -105,7 +106,6 @@ let RevealElementsOnScroll = {
                 }
             }
         });
-    },
     },
 }
 export default RevealElementsOnScroll
