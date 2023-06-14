@@ -107,5 +107,25 @@ let RevealElementsOnScroll = {
             }
         });
     },
+    FullRotation: (className, referenceClass) => {
+        const reference = document.getElementsByClassName(referenceClass)[0]
+        reference.addEventListener("scroll", function () {
+            var screen = window.innerHeight;
+            var hidden = document.getElementsByClassName(className);
+            for (var i = 0; i < hidden.length; i++) {
+                hidden[i].style.transition = '1000ms ease-out'
+                hidden[i].style.position = 'absolute'
+                hidden[i].style.transitionProperty = "opacity, transform"
+                var distance = hidden[i].getBoundingClientRect().top;
+                if (distance < screen) {
+                    hidden[i].style.opacity = 1
+                    hidden[i].style.transform = 'rotate(360deg)'
+                } else {
+                    hidden[i].style.opacity = 0
+                    hidden[i].style.transform = 'rotate(0deg)'
+                }
+            }
+        });
+    },
 }
 export default RevealElementsOnScroll
