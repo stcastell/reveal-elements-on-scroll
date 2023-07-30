@@ -127,5 +127,27 @@ let RevealElementsOnScroll = {
             }
         });
     },
+    
+    DisappearIfOnTop: (className, referenceClass, referenceElementClass) => {
+        const hidden = document.getElementsByClassName(className);
+        hidden[0].style.opacity = 0
+
+        const reference = document.getElementsByClassName(referenceClass)[0]
+        const referenceElement = document.getElementsByClassName(referenceElementClass)[0]
+
+        reference.addEventListener("scroll", function () {
+            for (var i = 0; i < hidden.length; i++) {
+                hidden[i].style.transition = '1000ms ease-out'
+                hidden[i].style.position = 'absolute'
+                hidden[i].style.transitionProperty = "opacity"
+                var distance = referenceElement.getBoundingClientRect().top;
+                if (distance <= 0 && distance >= -100) {
+                    hidden[i].style.opacity = 0
+                } else {
+                    hidden[i].style.opacity = 1
+                }
+            }
+        });
+    },
 }
 export default RevealElementsOnScroll
